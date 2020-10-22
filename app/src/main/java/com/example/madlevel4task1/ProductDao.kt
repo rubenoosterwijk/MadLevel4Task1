@@ -1,12 +1,15 @@
 package com.example.madlevel4task1
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
 
 @Dao
 interface ProductDao {
 
-    @Query("SELECT * FROM product_table")
-    suspend fun getAllProduct(): List<Product>
+    @Query("SELECT * FROM productTable")
+    suspend fun getAllProducts(): List<Product>
 
     @Insert
     suspend fun insertProduct(product: Product)
@@ -14,7 +17,7 @@ interface ProductDao {
     @Delete
     suspend fun deleteProduct(product: Product)
 
-    @Update
-    suspend fun updateProduct(product: Product)
+    @Query("DELETE FROM productTable")
+    suspend fun deleteAllProducts()
 
 }

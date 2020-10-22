@@ -1,3 +1,5 @@
+package com.example.madlevel4task1
+
 import android.content.Context
 import com.example.madlevel4task1.Product
 import com.example.madlevel4task1.ProductDao
@@ -13,7 +15,7 @@ class ProductRepository(context: Context) {
     }
 
     suspend fun getAllProducts(): List<Product> {
-        return productDao.getAllProduct()
+        return productDao.getAllProducts()
     }
 
     suspend fun insertProduct(product: Product) {
@@ -22,6 +24,10 @@ class ProductRepository(context: Context) {
 
     suspend fun deleteProduct(product: Product) {
         productDao.deleteProduct(product)
+    }
+
+    suspend fun deleteAllProducts() {
+        productDao.deleteAllProducts()
     }
 
 }
