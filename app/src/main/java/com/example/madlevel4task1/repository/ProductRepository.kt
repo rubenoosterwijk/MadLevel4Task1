@@ -1,9 +1,6 @@
 package com.example.madlevel4task1
 
 import android.content.Context
-import com.example.madlevel4task1.Product
-import com.example.madlevel4task1.ProductDao
-import com.example.madlevel4task1.ShoppingListRoomDatabase
 
 class ProductRepository(context: Context) {
 
