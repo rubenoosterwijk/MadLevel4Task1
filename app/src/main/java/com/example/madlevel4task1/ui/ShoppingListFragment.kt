@@ -1,4 +1,4 @@
-package com.example.madlevel4task1
+package com.example.madlevel4task1.ui
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.madlevel4task1.R
 import com.example.madlevel4task1.adapter.ShoppingListAdapter
 import com.example.madlevel4task1.model.Product
 import com.example.madlevel4task1.repository.ProductRepository
@@ -27,7 +28,6 @@ class ShoppingListFragment : Fragment() {
 
     private lateinit var productRepository: ProductRepository
     private val mainScope = CoroutineScope(Dispatchers.Main)
-
     private val products = arrayListOf<Product>()
     private val shoppingListAdapter = ShoppingListAdapter(products)
 
@@ -43,13 +43,11 @@ class ShoppingListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         productRepository = ProductRepository(requireContext())
         getShoppingListFromDatabase()
-
         initRv()
 
         fabAddProduct.setOnClickListener {
             showAddProductdialog()
         }
-
         fabDeleteAll.setOnClickListener {
             removeAllProducts()
         }
@@ -73,8 +71,6 @@ class ShoppingListFragment : Fragment() {
             // Callback triggered when a user swiped an item.
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
-//                products.removeAt(position)
-//                shoppingListAdapter.notifyDataSetChanged()
                 val productToDelete = products[position]
                 CoroutineScope(Dispatchers.Main).launch {
                     withContext(Dispatchers.IO) {
@@ -122,7 +118,6 @@ class ShoppingListFragment : Fragment() {
                 withContext(Dispatchers.IO) {
                     productRepository.insertProduct(product)
                 }
-
                 getShoppingListFromDatabase()
             }
         }
